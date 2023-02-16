@@ -1,18 +1,39 @@
 import React from 'react';
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
-  <Container id={PAGE_IDS.LANDING} className="py-3">
+  <Container
+    id={PAGE_IDS.LANDING}
+    className="py-3"
+    style={
+      {
+        backgroundColor: '#d9d9d9',
+        borderRadius: '10px',
+      }
+    }
+  >
     <Row className="align-middle text-center">
-      <Col xs={4}>
-        <Image roundedCircle src="/images/meteor-logo.png" width="150px" />
+      <Col>
+        <Image src="/images/Logo4.png" width="150px" />
+        <h1>Training Tracker</h1>
       </Col>
 
-      <Col xs={8} className="d-flex flex-column justify-content-center">
-        <h1>Welcome to this template</h1>
-        <p>Now get to work and modify this app!</p>
+      <Col className="d-flex flex-column justify-content-center">
+        <Card className="mx-5">
+          <Card.Header>
+            <h3>Getting Started</h3>
+          </Card.Header>
+          <Card.Body>
+            <p>
+              Track your own stats or manage your unit stats by signing in
+            </p>
+            <Button>
+              Sign In
+            </Button>
+          </Card.Body>
+        </Card>
       </Col>
 
     </Row>
