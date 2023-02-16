@@ -34,8 +34,8 @@ const App = () => {
     };
   });
   return (
-    <div>
-      <Router>
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Landing />} />
@@ -85,8 +85,9 @@ const App = () => {
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 
