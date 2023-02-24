@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Meteor } from "meteor/meteor";
+import { useTracker } from "meteor/react-meteor-data";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { Nav } from "react-bootstrap";
@@ -11,6 +13,7 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { blue } from "@mui/material/colors";
+import Landing from "../pages/Landing";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -21,10 +24,16 @@ function SideBar() {
 
   const [selected, setSelected] = useState();
 
+  const { currentUser } = useTracker(
+    () => ({
+      currentUser: Meteor.user() ? Meteor.user().username : "",
+    }),
+    []
+  );
+
   return (
-    // div for SideBar
     <div style={{ display: "flex", height: "100vh" }}>
-      <div style={{ display: "flex", backgroundColor: "rgb(0, 14, 108)" }}>
+      <div style={{ display: "flex" }}>
         {/* Logo goes here */}
         {/* Team name goes inline with logo */}
         <ProSidebarProvider>
