@@ -1,17 +1,17 @@
 import React from "react";
 import { Box } from "@mui/material";
 import PieChart from "../components/PieChart";
-import { blue } from "@mui/material/colors";
+import { Col, Container, Row } from "react-bootstrap";
 
 const BarChartBox = () => {
   return (
-    <Box sx={{
-        m: '20px', ml: 175, width: 550}}>
-        
-        <Box height="75vh">
-            <PieChart />
-        </Box>
-    </Box>
+    <Container fluid="md ">
+      <Row style={{ marginTop: "10vh",marginLeft: "35vh", height: 3000 }}>
+        <Col style={{height: 600 }}>
+          <PieChart />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

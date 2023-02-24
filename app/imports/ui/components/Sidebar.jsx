@@ -11,7 +11,7 @@ import {
 } from "react-pro-sidebar";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { House } from "react-bootstrap-icons";
 import { blue } from "@mui/material/colors";
 import Landing from "../pages/Landing";
 
@@ -40,10 +40,10 @@ function SideBar() {
           <Sidebar
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                paddingTop: "150px",
+                paddingTop: "300px",
               },
               [`.${menuClasses.menuItemRoot}`]: {
-                paddingTop: "30px",
+                paddingTop: "90px",
                 color: "black",
               },
             }}
@@ -58,10 +58,11 @@ function SideBar() {
               }}
             >
               {/* Need to Link for the following menu items below */}
-              <MenuItem> Dashboard</MenuItem>
-              <MenuItem> Training</MenuItem>
-              <MenuItem> Members</MenuItem>
-              <MenuItem> Profile</MenuItem>
+              <MenuItem icon={<House size={20} />} component={<Link to="/dashboard" />}>
+                Dashboard
+              </MenuItem>
+              <MenuItem> Profiles</MenuItem>
+              <MenuItem> Reports</MenuItem>
             </Menu>
           </Sidebar>
         </ProSidebarProvider>

@@ -42,9 +42,9 @@ const App = () => {
     <div className="d-flex flex-column min-vh-100">
       {Meteor.user() ? (
         <div className="app">
-          <SideBar />
-          <main className="content">
-            <Router>
+          <Router>
+            <SideBar />
+            <main className="content">
               <NavBar />
               <Routes>
                 <Route exact path="/" element={<Landing />} />
@@ -52,18 +52,18 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signout" element={<SignOut />} />
                 <Route
-                  path="/home"
+                  path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <Landing />
+                      <BarChartBox />
                     </ProtectedRoute>
                   }
                 />
                 <Route path="/notauthorized" element={<NotAuthorized />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </Router>
-          </main>
+            </main>
+          </Router>
         </div>
       ) : (
         <Router>

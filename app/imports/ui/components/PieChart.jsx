@@ -11,6 +11,7 @@ const PieChart = ({ isDashboard = false }) => {
       padAngle={0.7}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
+      colors={["#c73732", "#ded362", "#7ccf78" ]}
       borderWidth={1}
       borderColor={{
         from: "color",
@@ -98,7 +99,7 @@ const PieChart = ({ isDashboard = false }) => {
           direction: "row",
           justify: false,
           translateX: 0,
-          translateY: 30,
+          translateY: 70,
           itemsSpacing: 100,
           itemWidth: 50,
           itemHeight: 20,
