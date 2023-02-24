@@ -40,31 +40,52 @@ const App = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <div className="app">
-        <main className="content">
-          <Router>
-            <NavBar />
-            <Routes>
-              <Route exact path="/" element={<Landing />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signout" element={<SignOut />} />
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Landing />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/dashboard" element={<BarChartBox />} />
-              <Route path="/admin" element={<BarChartBox />} />
-              <Route path="/notauthorized" element={<NotAuthorized />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Router>
-        </main>
-      </div>
+      {Meteor.user() ? (
+        <div className="app">
+          <SideBar />
+          <main className="content">
+            <Router>
+              <NavBar />
+              <Routes>
+                <Route exact path="/" element={<Landing />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signout" element={<SignOut />} />
+                <Route
+                  path="/home"
+                  element={
+                    <ProtectedRoute>
+                      <Landing />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/notauthorized" element={<NotAuthorized />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Router>
+          </main>
+        </div>
+      ) : (
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route exact path="/" element={<Landing />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signout" element={<SignOut />} />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Landing />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/notauthorized" element={<NotAuthorized />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      )}
     </div>
   );
 };
