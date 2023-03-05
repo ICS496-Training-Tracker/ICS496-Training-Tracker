@@ -19,3 +19,11 @@ fixture('meteor-application-template-production localhost test with default db')
 test('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
+
+/* Test for signup page */
+/* Test for signin page */
+
+/* Test for navbar page */
+
+/* Test for dashboard page */
+
