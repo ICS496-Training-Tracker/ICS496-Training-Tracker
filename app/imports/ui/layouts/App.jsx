@@ -26,6 +26,7 @@ import NotAuthorized from "../pages/NotAuthorized";
 import { ROLE } from "../../api/role/Role";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import Profiles from '../pages/Profiles';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -97,7 +98,7 @@ const App = () => {
  */
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
-  console.log("ProtectedRoute", isLogged);
+  console.log('ProtectedRoute', isLogged);
   return isLogged ? children : <Navigate to="/signin" />;
 };
 
@@ -115,7 +116,7 @@ const AdminProtectedRoute = ({ ready, children }) => {
     return <LoadingSpinner />;
   }
   const isAdmin = Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]);
-  console.log("AdminProtectedRoute", isLogged, isAdmin);
+  console.log('AdminProtectedRoute', isLogged, isAdmin);
   return isLogged && isAdmin ? children : <Navigate to="/notauthorized" />;
 };
 
