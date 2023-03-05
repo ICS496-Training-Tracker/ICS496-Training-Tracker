@@ -62,6 +62,7 @@ function SideBar() {
                 Dashboard
               </MenuItem>
               <MenuItem> Profiles</MenuItem>
+              <MenuItem> Training</MenuItem>
               <MenuItem> Reports</MenuItem>
             </Menu>
           </Sidebar>
