@@ -8,6 +8,7 @@ const DragAndDrop = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    setDrag(false);
     if (e.dataTransfer.items == null) {
       console.log('something went wrong');
       return;
@@ -52,6 +53,18 @@ const DragAndDrop = () => {
     setHover(false);
   };
 
+  const handleOnClick = () => {
+    document.getElementById('fileInput').click();
+  };
+
+  const handleChange = (e) => {
+    if (e.target.files.length > 1) {
+      console.log('Too many files');
+      return;
+    }
+    setFile(e.target.files[0]);
+  };
+
   const getStyle = () => {
     const style = { overflow: 'hidden' };
     if (hover) style.borderWidth = '3px';
@@ -66,9 +79,11 @@ const DragAndDrop = () => {
       onDragLeave={handleDragLeave}
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onClick={handleOnClick}
       style={getStyle()}
       className="text-center p-0"
     >
+      <input id="fileInput" type="file" style={{ display: 'none' }} onChange={handleChange} />
       {drag ? (
         <div
           style={{ width: '100%', height: '100%', backgroundColor: 'black', opacity: '.3', pointerEvents: 'none', position: 'absolute' }}
