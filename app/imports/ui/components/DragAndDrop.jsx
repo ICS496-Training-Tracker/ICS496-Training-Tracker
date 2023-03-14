@@ -104,6 +104,7 @@ const DragAndDrop = ({ onUpload }) => {
       style={getStyle()}
       className="text-center p-0"
       id="dragAndDrop"
+      bg="light"
     >
       <input
         id="fileInput"

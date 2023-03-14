@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
-import { Button, Col, Container, Row, Table, Form, Card } from 'react-bootstrap';
+import React from 'react';
+import { Button, Col, Container, Row, Form } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import DragAndDrop from '../components/DragAndDrop';
 
 const Reports = () => {
-  const [file, setFile] = useState(null);
+  const trainings = ['MRDSS', 'ARCNET', 'MyLearning'];
+  let upload = trainings[0];
+  let download = trainings[0];
 
-  const trainings = () => {
-    const list = ['MRDSS', 'ARCNET', 'MyLearning'];
-    return (
-      <Form.Select aria-label="Select Training">
-        {list.map((val) => (<option value={val}>{val}</option>))}
-      </Form.Select>
-    );
+  const changeUpload = (e) => {
+    upload = e.target.value;
+  };
+
+  const changeDownload = (e) => {
+    download = e.target.value;
   };
 
   const handleUpload = (f) => {
-    setFile(f);
+    console.log(`Uploading ${f.name} with value of ${upload}`);
+  };
+
+  const handleDownload = () => {
+    console.log(`download with value of ${download}`);
   };
 
   return (
@@ -29,14 +34,13 @@ const Reports = () => {
           <Row>
             <Container className="my-5 px-5">
               <h5 className="text-center">Training Type</h5>
-              {trainings()}
+              <Form.Select aria-label="Select Training" onChange={changeUpload}>
+                {trainings.map((val) => (<option key={val} value={val}>{val}</option>))}
+              </Form.Select>
             </Container>
           </Row>
           <Row />
           <Row>
-            <Card className="file-upload-wrapper">
-              {file ? file.name : null}
-            </Card>
             <DragAndDrop width="100%" height="200px" onUpload={handleUpload} />
           </Row>
         </Col>
@@ -47,8 +51,11 @@ const Reports = () => {
           <Row>
             <Container className="my-5 px-5">
               <h5 className="text-center">Training Type</h5>
-              {trainings()}
+              <Form.Select aria-label="Select Training" onChange={changeDownload}>
+                {trainings.map((val) => (<option key={val} value={val}>{val}</option>))}
+              </Form.Select>
             </Container>
+            <Button variant="light" onClick={handleDownload}>Click to Download</Button>
           </Row>
         </Col>
       </Row>
