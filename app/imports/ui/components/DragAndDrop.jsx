@@ -12,15 +12,15 @@ const DragAndDrop = ({ onUpload }) => {
     e.stopPropagation();
     setDrag(false);
     if (e.dataTransfer.items == null) {
-      console.log('something went wrong');
+      // console.log('something went wrong');
       return;
     }
     if (e.dataTransfer.items.length > 1) {
-      console.log('too many files', e.dataTransfer.items.length);
+      // console.log('too many files', e.dataTransfer.items.length);
       return;
     }
     if (e.dataTransfer.items[0].kind !== 'file') {
-      console.log('please drop file');
+      // console.log('please drop file');
       return;
     }
     setFile(e.dataTransfer.files[0]);
@@ -61,11 +61,11 @@ const DragAndDrop = ({ onUpload }) => {
 
   const handleChange = (e) => {
     if (e.target.files.length > 1) {
-      console.log('Too many files');
+      // console.log('Too many files');
       return;
     }
     if (e.target.files.length < 1) {
-      console.log('No file Selected');
+      // console.log('No file Selected');
       return;
     }
     setFile(e.target.files[0]);
