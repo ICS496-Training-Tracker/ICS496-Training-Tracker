@@ -27,6 +27,7 @@ import { ROLE } from "../../api/role/Role";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Profiles from '../pages/Profiles';
+import Reports from '../pages/Reports';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -59,6 +60,22 @@ const App = () => {
                       <BarChartBox />
                     </ProtectedRoute>
                   }
+                />
+                <Route
+                  path="/profiles"
+                  element={(
+                    <ProtectedRoute>
+                      <Profiles />
+                    </ProtectedRoute>
+                  )}
+                />
+                <Route
+                  path="/reports"
+                  element={(
+                    <ProtectedRoute>
+                      <Reports />
+                    </ProtectedRoute>
+                  )}
                 />
                 <Route path="/notauthorized" element={<NotAuthorized />} />
                 <Route path="*" element={<NotFound />} />

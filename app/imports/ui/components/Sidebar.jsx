@@ -61,9 +61,9 @@ function SideBar() {
               <MenuItem icon={<House size={20} />} component={<Link to="/dashboard" />}>
                 Dashboard
               </MenuItem>
-              <MenuItem> Profiles</MenuItem>
+              <MenuItem component={<Link to="/profiles" />}> Profiles</MenuItem>
               <MenuItem> Training</MenuItem>
-              <MenuItem> Reports</MenuItem>
+              <MenuItem component={<Link to="/reports" />}> Reports</MenuItem>
             </Menu>
           </Sidebar>
         </ProSidebarProvider>
