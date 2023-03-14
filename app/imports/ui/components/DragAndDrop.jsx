@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Card, Button } from 'react-bootstrap';
+import { Upload, BoxArrowInDown } from 'react-bootstrap-icons';
 
-const DragAndDrop = () => {
+const DragAndDrop = ({ onUpload }) => {
   const [hover, setHover] = useState(false);
   const [drag, setDrag] = useState(false);
   const [file, setFile] = useState(null);
@@ -25,12 +27,12 @@ const DragAndDrop = () => {
   };
 
   const handleDragOver = (e) => {
+    setDrag(true);
     e.preventDefault();
     e.stopPropagation();
   };
 
   const handleDragEnter = (e) => {
-    setDrag(true);
     e.preventDefault();
     e.stopPropagation();
   };
@@ -62,11 +64,30 @@ const DragAndDrop = () => {
       console.log('Too many files');
       return;
     }
+    if (e.target.files.length < 1) {
+      console.log('No file Selected');
+      return;
+    }
     setFile(e.target.files[0]);
   };
 
+  const handleUpload = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onUpload(file);
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFile(null);
+  };
+
   const getStyle = () => {
-    const style = { overflow: 'hidden' };
+    const style = {
+      overflow: 'hidden',
+      height: '250px',
+    };
     if (hover) style.borderWidth = '3px';
     return style;
   };
@@ -82,18 +103,59 @@ const DragAndDrop = () => {
       onClick={handleOnClick}
       style={getStyle()}
       className="text-center p-0"
+      id="dragAndDrop"
     >
-      <input id="fileInput" type="file" style={{ display: 'none' }} onChange={handleChange} />
+      <input
+        id="fileInput"
+        type="file"
+        style={{ display: 'none' }}
+        onChange={handleChange}
+      />
       {drag ? (
         <div
-          style={{ width: '100%', height: '100%', backgroundColor: 'black', opacity: '.3', pointerEvents: 'none', position: 'absolute' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'black',
+            opacity: '.6',
+            pointerEvents: 'none',
+            position: 'absolute',
+          }}
         >
-          drop here
+          <h5 style={{ color: 'white' }}>Drop File Here</h5>
         </div>
       ) : null}
-      Upload here {file ? file.name : null}
+
+      {file ? (
+        <div className="text-center">
+          <Upload
+            size={80}
+            className="mt-5"
+            style={{ pointerEvents: 'none' }}
+          />
+          <div style={{ pointerEvents: 'none' }}>
+            {file.name}
+          </div>
+          <Button className="mx-2" onClick={handleUpload}>Upload</Button>
+          <Button className="mx-2" onClick={handleCancel}>Cancel</Button>
+        </div>
+      ) :
+        (
+          <div className="text-center" style={{ pointerEvents: 'none' }}>
+            <BoxArrowInDown
+              size={80}
+              className="mt-5"
+            />
+            <div>Drag And Drop Files Here</div>
+          </div>
+        )}
+
     </Card>
   );
+};
+
+DragAndDrop.propTypes = {
+  onUpload: PropTypes.func.isRequired,
 };
 
 export default DragAndDrop;

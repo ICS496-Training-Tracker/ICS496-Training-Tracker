@@ -4,6 +4,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import DragAndDrop from '../components/DragAndDrop';
 
 const Reports = () => {
+  const [file, setFile] = useState(null);
 
   const trainings = () => {
     const list = ['MRDSS', 'ARCNET', 'MyLearning'];
@@ -12,6 +13,10 @@ const Reports = () => {
         {list.map((val) => (<option value={val}>{val}</option>))}
       </Form.Select>
     );
+  };
+
+  const handleUpload = (f) => {
+    setFile(f);
   };
 
   return (
@@ -27,13 +32,12 @@ const Reports = () => {
               {trainings()}
             </Container>
           </Row>
-          <Row>
-          </Row>
+          <Row />
           <Row>
             <Card className="file-upload-wrapper">
-              upload
+              {file ? file.name : null}
             </Card>
-            <DragAndDrop />
+            <DragAndDrop width="100%" height="200px" onUpload={handleUpload} />
           </Row>
         </Col>
         <Col className="border-start px-5">
