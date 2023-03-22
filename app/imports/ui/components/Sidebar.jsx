@@ -40,10 +40,10 @@ function SideBar() {
           <Sidebar
             rootStyles={{
               [`.${sidebarClasses.container}`]: {
-                paddingTop: "300px",
+                paddingTop: "53px",
               },
               [`.${menuClasses.menuItemRoot}`]: {
-                paddingTop: "90px",
+                paddingTop: "70px",
                 color: "black",
               },
             }}
@@ -58,7 +58,7 @@ function SideBar() {
               }}
             >
               {/* Need to Link for the following menu items below */}
-              <MenuItem icon={<House size={20} />} component={<Link to="/dashboard" />}>
+              <MenuItem component={<Link to="/dashboard" />}>
                 Dashboard
               </MenuItem>
               <MenuItem component={<Link to="/profiles" />}> Profiles</MenuItem>

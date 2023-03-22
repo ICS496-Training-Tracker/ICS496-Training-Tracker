@@ -12,12 +12,12 @@ class mrdssCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ trainingTitle, trainedDate, firstName, lastName }) {
+  define({ trainingTitle, trainedDate, dueDate, firstName, lastName }) {
     // if (Meteor.isServer) {
     const username = email;
-    const user = this.findOne({ trainingTitle, firstName, lastName });
+    const user = this.findOne({ trainingTitle, dueDate, firstName, lastName });
     if (!user) {
-      const trainingID = this._collection.insert({ trainingTitle, trainedDate, firstName, lastName });
+      const trainingID = this._collection.insert({ trainingTitle, dueDate, trainedDate, firstName, lastName });
       // this._collection.update(profileID, { $set: { userID } });
       return trainingID;
     }
@@ -35,7 +35,7 @@ class mrdssCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { trainingTitle, trainedDate, firstName, lastName }) {
+  update(docID, { trainingTitle, dueDate, trainedDate, firstName, lastName }) {
     this.assertDefined(docID);
     const updateData = {};
     if (trainingTitle) {
@@ -43,6 +43,9 @@ class mrdssCollection {
     }
     if (trainedDate) {
       updateData.trainedDate = trainedDate;
+    }
+    if (dueDate) {
+      updateData.dueDate = dueDate;
     }
     if (firstName) {
       updateData.firstName = firstName;
