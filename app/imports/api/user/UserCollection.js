@@ -200,6 +200,38 @@ class UserCollection {
     }
   }
 
+  /**
+   * Subscription method for profile owned by the current user.
+   */
+  subscribeProfile() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesMember);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for unit trainers.
+   * It subscribes to the entire collection.
+   */
+  subscribeProfilesTrainer() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesTrainer);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for admin users.
+   * It subscribes to the entire collection.
+   */
+  subscribeProfilesAdmin() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesAdmin);
+    }
+    return null;
+  }
+
 }
 
 export const Users = new UserCollection();
