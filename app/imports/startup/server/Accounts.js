@@ -10,7 +10,7 @@ function createUser(email, role, firstName, lastName, password) {
   if (role === ROLE.ADMIN) {
     AdminProfiles.define({ email, firstName, lastName, password });
   } else { // everyone else is just a user.
-    UserProfiles.define({ email, firstName, lastName, password });
+    UserProfiles.define({ email, firstName, lastName, password, role });
   }
 }
 

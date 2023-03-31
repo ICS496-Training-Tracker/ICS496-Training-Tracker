@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Col, Container, Row, Table, Form } from 'react-bootstrap';
+import ProfileListItem from '../components/ProfileListItem';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { UserProfiles } from '../../api/user/UserProfileCollection';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Profiles = () => {
+  const { ready, profiles } = useTracker(() => {
+    const subscription = UserProfiles.subscribeProfilesAdmin();
+    const rdy = subscription.ready();
+    const profilesList = UserProfiles.find({}, { sort: { lastName: 1 } }).fetch();
+    console.log(profilesList.length);
+    return {
+      profiles: profilesList,
+      ready: rdy,
+    };
+  }, []);
 
   const [searchVal, setSearchVal] = useState('');
 
@@ -26,7 +40,7 @@ const Profiles = () => {
     console.log('Reports Button');
   };
 
-  return (
+  return (ready ? (
     <Container
       id={PAGE_IDS.PROFILES}
       style={
@@ -73,11 +87,13 @@ const Profiles = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody />
+          <tbody>
+            {profiles.map((profile) => <ProfileListItem profile={profile} />)}
+          </tbody>
         </Table>
       </Row>
     </Container>
-  );
+  ) : <LoadingSpinner message="Loading Stuff" />);
 };
 
 export default Profiles;

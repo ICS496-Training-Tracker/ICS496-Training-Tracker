@@ -1,5 +1,7 @@
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import BaseProfileCollection, { profilePublications } from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
 
@@ -15,12 +17,11 @@ class UserProfileCollection extends BaseProfileCollection {
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ email, firstName, lastName, password }) {
+  define({ email, firstName, lastName, password, role }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
-      const role = ROLE.USER;
       const userID = Users.define({ username, role, password });
       const profileID = this._collection.insert({ email, firstName, lastName, userID, role });
       // this._collection.update(profileID, { $set: { userID } });
@@ -99,6 +100,71 @@ class UserProfileCollection extends BaseProfileCollection {
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     return { email, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+  }
+
+  publish() {
+    if (Meteor.isServer) {
+      // get the StuffCollection instance.
+      const instance = this;
+      /** This subscription publishes only the profile associated with the logged in user */
+      Meteor.publish(profilePublications.profilesMember, function publish() {
+        if (this.userId) {
+          const userID = this.userId;
+          return instance._collection.find({ userID: userID });
+        }
+        return this.ready();
+      });
+
+      /** This subscription publishes only the profiles associated with the members associated with the unit trainer's unit,
+       * must be logged in as a UNIT_TRAINER */
+      Meteor.publish(profilePublications.profilesTrainer, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.UNIT_TRAINER)) {
+          const unit = instance._collection.findOne({ userID: this.userID }).unit;
+          return instance._collection.find({ unit: unit });
+        }
+        return this.ready();
+      });
+
+      /** This subscription publishes all profiles regardless of user, but only if the logged in user is the Admin. */
+      Meteor.publish(profilePublications.profilesAdmin, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
+    }
+  }
+
+  /**
+   * Subscription method for profile owned by the current user.
+   */
+  subscribeProfile() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesMember);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for unit trainers.
+   * It subscribes to the entire collection.
+   */
+  subscribeProfilesTrainer() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesTrainer);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for admin users.
+   * It subscribes to the entire collection.
+   */
+  subscribeProfilesAdmin() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(profilePublications.profilesAdmin);
+    }
+    return null;
   }
 }
 

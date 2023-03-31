@@ -3,13 +3,6 @@ import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 import { Stuffs } from '../stuff/StuffCollection';
-import { ROLE } from '../role/Role';
-
-export const profilePublications = {
-  profilesAdmin: 'ProfilesAdmin',
-  profilesTrainer: 'ProfilesTrainer',
-  profilesMember: 'ProfilesMember',
-};
 
 /**
  * Represents a user, which is someone who has a Meteor account.
@@ -163,75 +156,6 @@ class UserCollection {
     }
     return profile;
   }
-
-  /**
-   * Default publication method for entities.
-   * It publishes the entire collection for admin and just the stuff associated to an owner.
-   */
-  publish() {
-    if (Meteor.isServer) {
-      // get the StuffCollection instance.
-      const instance = this;
-      /** This subscription publishes only the profile associated with the logged in user */
-      Meteor.publish(profilePublications.profilesMember, function publish() {
-        if (this.userId) {
-          return instance._collection.findOne({ userID: this.userID });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes only the profiles associated with the members associated with the unit trainer's unit,
-       * must be logged in as a UNIT_TRAINER */
-      Meteor.publish(profilePublications.profilesTrainer, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.UNIT_TRAINER)) {
-          const unit = instance._collection.findOne({ userID: this.userID }).unit;
-          return instance._collection.find({ unit: unit });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all profiles regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(profilePublications.profilesAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
-    }
-  }
-
-  /**
-   * Subscription method for profile owned by the current user.
-   */
-  subscribeProfile() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(profilePublications.profilesMember);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for unit trainers.
-   * It subscribes to the entire collection.
-   */
-  subscribeProfilesTrainer() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(profilePublications.profilesTrainer);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeProfilesAdmin() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(profilePublications.profilesAdmin);
-    }
-    return null;
-  }
-
 }
 
 export const Users = new UserCollection();

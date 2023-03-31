@@ -7,7 +7,14 @@ import { Users } from './UserCollection';
 
 const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
-rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
+rolesToCollectionNames[ROLE.UNIT_MEMBER] = 'UserProfileCollection';
+rolesToCollectionNames[ROLE.UNIT_TRAINER] = 'UserProfileCollection';
+
+export const profilePublications = {
+  profilesAdmin: 'ProfilesAdmin',
+  profilesTrainer: 'ProfilesTrainer',
+  profilesMember: 'ProfilesMember',
+};
 
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
@@ -15,10 +22,22 @@ class BaseProfileCollection extends BaseCollection {
       email: String,
       firstName: String,
       lastName: String,
-      status: Number,
-      afsc: String,
-      rank: String,
-      unit: String,
+      status: {
+        optional: true,
+        type: Number,
+      },
+      afsc: {
+        optional: true,
+        type: String,
+      },
+      rank: {
+        optional: true,
+        type: String,
+      },
+      unit: {
+        optional: true,
+        type: String,
+      },
       role: String,
       userID: /^[23456789ABCDEFGHJKLMNPQRSTWXYZabcdefghijkmnopqrstuvwxyz]{17}$/,
     })));
@@ -136,7 +155,6 @@ class BaseProfileCollection extends BaseCollection {
     }
     throw new Meteor.Error(`User ${profile.email} owns Stuff.`);
   }
-
 }
 
 export default BaseProfileCollection;

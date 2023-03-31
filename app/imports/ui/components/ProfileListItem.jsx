@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 const ProfileListItem = ({ profile }) => {
 
@@ -10,6 +10,11 @@ const ProfileListItem = ({ profile }) => {
 
   return (
     <tr>
+      <td>
+        <Form className="d-flex">
+          <Form.Check />
+        </Form>
+      </td>
       <td>{profile.lastName}</td>
       <td>{profile.firstName}</td>
       <td>{profile.rank}</td>
