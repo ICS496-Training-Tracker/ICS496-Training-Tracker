@@ -11,7 +11,6 @@ const Profiles = () => {
     const subscription = UserProfiles.subscribeProfilesAdmin();
     const rdy = subscription.ready();
     const profilesList = UserProfiles.find({}, { sort: { lastName: 1 } }).fetch();
-    console.log(profilesList.length);
     return {
       profiles: profilesList,
       ready: rdy,
@@ -19,6 +18,7 @@ const Profiles = () => {
   }, []);
 
   const [searchVal, setSearchVal] = useState('');
+  const [checked, setChecked] = useState(false);
 
   const searchButton = () => {
     console.log(searchVal);
@@ -38,6 +38,12 @@ const Profiles = () => {
 
   const reportsButton = () => {
     console.log('Reports Button');
+  };
+
+  const handleCheck = (e) => {
+    const isChecked = e.target.checked;
+    setChecked(isChecked);
+    console.log(checked);
   };
 
   return (ready ? (
@@ -76,7 +82,7 @@ const Profiles = () => {
             <tr>
               <th>
                 <Form className="d-flex">
-                  <Form.Check />
+                  <Form.Check onChange={handleCheck} defaultChecked={checked} />
                 </Form>
               </th>
               <th>Last Name</th>
@@ -88,7 +94,7 @@ const Profiles = () => {
             </tr>
           </thead>
           <tbody>
-            {profiles.map((profile) => <ProfileListItem profile={profile} />)}
+            {profiles.map((profile) => <ProfileListItem key={profile.userID} profile={profile} checked={checked} />)}
           </tbody>
         </Table>
       </Row>

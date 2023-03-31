@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 
-const ProfileListItem = ({ profile }) => {
+const ProfileListItem = ({ profile, checked }) => {
+  const [isChecked, setIsChecked] = useState(checked);
 
   const viewHandler = () => {
     console.log(`view ${profile.userID}`);
+  };
+
+  const checkHandler = (e) => {
+    console.log(e.target.checked);
   };
 
   return (
     <tr>
       <td>
         <Form className="d-flex">
-          <Form.Check />
+          <Form.Check onChange={checkHandler} defaultChecked={isChecked} />
         </Form>
       </td>
       <td>{profile.lastName}</td>
@@ -37,6 +42,7 @@ ProfileListItem.propTypes = {
     role: PropTypes.string,
     userID: PropTypes.string,
   }).isRequired,
+  checked: PropTypes.bool.isRequired,
 };
 
 export default ProfileListItem;
