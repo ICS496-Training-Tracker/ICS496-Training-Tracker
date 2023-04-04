@@ -19,6 +19,7 @@ const Profiles = () => {
 
   const [searchVal, setSearchVal] = useState('');
   const [checked, setChecked] = useState(false);
+  const checkFunctionArray = [];
 
   const searchButton = () => {
     console.log(searchVal);
@@ -40,10 +41,23 @@ const Profiles = () => {
     console.log('Reports Button');
   };
 
+  // check or uncheck all
   const handleCheck = (e) => {
     const isChecked = e.target.checked;
     setChecked(isChecked);
-    console.log(checked);
+    for (let i = 0; i < checkFunctionArray.length; i++) {
+      checkFunctionArray[i](isChecked);
+    }
+  };
+
+  // uncheck master checkbox, called when one ProfileListItem is unchecked
+  const masterUncheck = () => {
+    setChecked(false);
+  };
+
+  // pushes function from child to an array
+  const getCheckFunction = (f) => {
+    checkFunctionArray.push(f);
   };
 
   return (ready ? (
@@ -82,7 +96,7 @@ const Profiles = () => {
             <tr>
               <th>
                 <Form className="d-flex">
-                  <Form.Check onChange={handleCheck} defaultChecked={checked} />
+                  <Form.Check onChange={handleCheck} checked={checked} />
                 </Form>
               </th>
               <th>Last Name</th>
@@ -94,7 +108,14 @@ const Profiles = () => {
             </tr>
           </thead>
           <tbody>
-            {profiles.map((profile) => <ProfileListItem key={profile.userID} profile={profile} checked={checked} />)}
+            {profiles.map((profile) => (
+              <ProfileListItem
+                key={profile.userID}
+                profile={profile}
+                getCheckFunction={getCheckFunction}
+                masterUncheck={masterUncheck}
+              />
+            ))}
           </tbody>
         </Table>
       </Row>

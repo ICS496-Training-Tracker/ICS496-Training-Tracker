@@ -1,23 +1,37 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 
-const ProfileListItem = ({ profile, checked }) => {
-  const [isChecked, setIsChecked] = useState(checked);
+const ProfileListItem = ({ profile, getCheckFunction, masterUncheck }) => {
+  const [checked, setChecked] = useState(false);
 
   const viewHandler = () => {
     console.log(`view ${profile.userID}`);
+    setChecked(true);
   };
 
+  // do when checkbox value changes
   const checkHandler = (e) => {
-    console.log(e.target.checked);
+    const isChecked = e.target.checked;
+    setChecked(isChecked);
+    if (!isChecked) {
+      masterUncheck();
+    }
   };
+
+  // function sent to parent to toggle checkbox
+  const checkToggle = (value) => {
+    setChecked(value);
+  };
+
+  // sends function to toggle checkbox to parent
+  getCheckFunction(checkToggle);
 
   return (
     <tr>
       <td>
         <Form className="d-flex">
-          <Form.Check onChange={checkHandler} defaultChecked={isChecked} />
+          <Form.Check onChange={checkHandler} checked={checked} />
         </Form>
       </td>
       <td>{profile.lastName}</td>
@@ -42,7 +56,8 @@ ProfileListItem.propTypes = {
     role: PropTypes.string,
     userID: PropTypes.string,
   }).isRequired,
-  checked: PropTypes.bool.isRequired,
+  getCheckFunction: PropTypes.func.isRequired,
+  masterUncheck: PropTypes.func.isRequired,
 };
 
 export default ProfileListItem;
