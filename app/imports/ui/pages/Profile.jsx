@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import swal from 'sweetalert';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,6 @@ const bridge = new SimpleSchema2Bridge(UserProfiles._schema);
 const Profile = () => {
   const { userID } = useParams();
   const [viewOnly, setViewOnly] = useState(true);
-  console.log(viewOnly);
   const { ready, doc } = useTracker(() => {
     let subscription;
     if (Roles.userIsInRole(Meteor.userId(), ROLE.ADMIN)) {
@@ -51,7 +50,7 @@ const Profile = () => {
 
   const editMode = () => {
     setViewOnly(false);
-  }
+  };
 
   return ready ? (
     <Container id={PAGE_IDS.PROFILE} className="py-3">
