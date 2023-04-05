@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const ProfileListItem = ({ profile, getCheckFunction, masterUncheck }) => {
   const [checked, setChecked] = useState(false);
@@ -39,7 +40,7 @@ const ProfileListItem = ({ profile, getCheckFunction, masterUncheck }) => {
       <td>{profile.rank}</td>
       <td>{profile.afsc}</td>
       <td>{profile.status}</td>
-      <td><Button onClick={viewHandler}>View</Button></td>
+      <td><Button onClick={viewHandler} as={NavLink} to={`/profile/${profile._id}`}>View</Button></td>
     </tr>
   );
 };
@@ -55,6 +56,7 @@ ProfileListItem.propTypes = {
     unit: PropTypes.string,
     role: PropTypes.string,
     userID: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
   getCheckFunction: PropTypes.func.isRequired,
   masterUncheck: PropTypes.func.isRequired,

@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Roles } from 'meteor/alanning:roles';
 import { Button, Col, Container, Row, Table, Form } from 'react-bootstrap';
 import ProfileListItem from '../components/ProfileListItem';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { ROLE } from '../../api/role/Role';
 
 const Profiles = () => {
   const { ready, profiles } = useTracker(() => {
-    const subscription = UserProfiles.subscribeProfilesAdmin();
+    let subscription;
+    if (Roles.userIsInRole(Meteor.userId(), ROLE.ADMIN)) {
+      subscription = UserProfiles.subscribeProfilesAdmin();
+    } else if (Roles.userIsInRole(Meteor.userId(), ROLE.UNIT_TRAINER)) {
+      subscription = UserProfiles.subscribeProfilesTrainer();
+    } else if (Roles.userIsInRole(Meteor.userId(), ROLE.UNIT_MEMBER)) {
+      subscription = UserProfiles.subscribeProfile();
+    }
     const rdy = subscription.ready();
     const profilesList = UserProfiles.find({}, { sort: { lastName: 1 } }).fetch();
     return {

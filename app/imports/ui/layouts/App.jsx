@@ -27,6 +27,7 @@ import { ROLE } from "../../api/role/Role";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Profiles from '../pages/Profiles';
+import Profile from '../pages/Profile';
 import Reports from '../pages/Reports';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -66,6 +67,14 @@ const App = () => {
                   element={(
                     <ProtectedRoute>
                       <Profiles />
+                    </ProtectedRoute>
+                  )}
+                />
+                <Route
+                  path="/profile/:userID"
+                  element={(
+                    <ProtectedRoute>
+                      <Profile />
                     </ProtectedRoute>
                   )}
                 />

@@ -38,7 +38,7 @@ class UserProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, afsc, rank, status, unit }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -46,6 +46,18 @@ class UserProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (unit) {
+      updateData.unit = unit;
+    }
+    if (afsc) {
+      updateData.afsc = afsc;
+    }
+    if (rank) {
+      updateData.rank = rank;
+    }
+    if (status) {
+      updateData.status = status;
     }
     this._collection.update(docID, { $set: updateData });
   }
