@@ -156,7 +156,6 @@ class UserCollection {
     }
     return profile;
   }
-
 }
 
 export const Users = new UserCollection();

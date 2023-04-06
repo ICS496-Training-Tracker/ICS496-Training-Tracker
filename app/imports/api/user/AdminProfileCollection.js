@@ -30,7 +30,7 @@ class AdminProfileCollection extends BaseProfileCollection {
       }
       return user._id;
     }
-    return undefined;
+    return null;
   }
 
   /**

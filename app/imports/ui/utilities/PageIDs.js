@@ -9,6 +9,7 @@ export const PAGE_IDS = {
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',
   PROFILES: 'profiles',
+  PROFILE: 'profile',
   REPORTS: 'reports',
   SIGN_IN: 'sign-in',
   SIGN_OUT: 'sign-out',
