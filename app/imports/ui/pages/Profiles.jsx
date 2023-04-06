@@ -41,7 +41,7 @@ const Profiles = () => {
     if (profile.afsc) returnValue ||= profile.afsc.includes(searchVal);
     if (profile.rank) returnValue ||= profile.rank.includes(searchVal);
     if (profile.email) returnValue ||= profile.email.includes(searchVal);
-    if (profile.status) returnValue ||= profile.status.includes(searchVal);
+    if (profile.status !== undefined || profile.status !== null) returnValue ||= `${profile.status}`.includes(searchVal);
     return returnValue;
   });
   const sortedList = _.sortBy(filteredList, sortBy);

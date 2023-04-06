@@ -57,7 +57,7 @@ const ProfileListItem = ({ profile, getCheckFunction, masterUncheck, searchTerm 
       <td>{prepareString(profile.unit)}</td>
       <td>{prepareString(profile.rank)}</td>
       <td>{prepareString(profile.afsc)}</td>
-      <td>{prepareString(profile.status)}</td>
+      <td>{prepareString(`${profile.status}`)}</td>
       <td><Button onClick={viewHandler} as={NavLink} to={`/profile/${profile._id}`}>View</Button></td>
     </tr>
   );

@@ -1,9 +1,34 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
-    },
-    { "email": "trainer@foo.com", "password": "changeme", "role": "UNIT_TRAINER" , "firstName": "trainer", "lastName": "train" },
-    { "email": "john@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "John", "lastName": "Doe" }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"},
+    { "email": "trainer1@foo.com", "password": "changeme", "role": "UNIT_TRAINER" , "firstName": "trainer1", "lastName": "train", "unit": "unit1", "rank": "rank5" },
+    { "email": "trainer2@foo.com", "password": "changeme", "role": "UNIT_TRAINER" , "firstName": "trainer2", "lastName": "train", "unit": "unit2", "rank": "rank5" },
+    { "email": "trainer3@foo.com", "password": "changeme", "role": "UNIT_TRAINER" , "firstName": "trainer3", "lastName": "train", "unit": "unit3", "rank": "rank5" },
+    { "email": "john@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "John", "lastName": "Doe", "unit": "unit1", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit1member1@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member1", "lastName": "Unit1", "unit": "unit1", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit1member2@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member2", "lastName": "Unit1", "unit": "unit1", "rank": "rank1", "afsc": "afsc1", "status": 1 },
+    { "email": "unit1member3@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member3", "lastName": "Unit1", "unit": "unit1", "rank": "rank1", "afsc": "afsc1", "status": 1 },
+    { "email": "unit1member4@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member4", "lastName": "Unit1", "unit": "unit1", "rank": "rank2", "afsc": "afsc1", "status": 2 },
+    { "email": "unit1member5@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member5", "lastName": "Unit1", "unit": "unit1", "rank": "rank2", "afsc": "afsc1", "status": 2 },
+    { "email": "unit1member6@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member6", "lastName": "Unit1", "unit": "unit1", "rank": "rank2", "afsc": "afsc2", "status": 2 },
+    { "email": "unit1member7@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member7", "lastName": "Unit1", "unit": "unit1", "rank": "rank2", "afsc": "afsc2", "status": 3 },
+    { "email": "unit1member8@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member8", "lastName": "Unit1", "unit": "unit1", "rank": "rank2", "afsc": "afsc2", "status": 3 },
+    { "email": "unit2member1@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member1", "lastName": "Unit2", "unit": "unit2", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit2member2@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member2", "lastName": "Unit2", "unit": "unit2", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit2member3@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member3", "lastName": "Unit2", "unit": "unit2", "rank": "rank1", "afsc": "afsc1", "status": 1 },
+    { "email": "unit2member4@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member4", "lastName": "Unit2", "unit": "unit2", "rank": "rank1", "afsc": "afsc1", "status": 1 },
+    { "email": "unit2member5@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member5", "lastName": "Unit2", "unit": "unit2", "rank": "rank2", "afsc": "afsc1", "status": 2 },
+    { "email": "unit2member6@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member6", "lastName": "Unit2", "unit": "unit2", "rank": "rank2", "afsc": "afsc2", "status": 2 },
+    { "email": "unit2member7@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member7", "lastName": "Unit2", "unit": "unit2", "rank": "rank2", "afsc": "afsc2", "status": 3 },
+    { "email": "unit2member8@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member8", "lastName": "Unit2", "unit": "unit2", "rank": "rank3", "afsc": "afsc2", "status": 3 },
+    { "email": "unit3member1@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member1", "lastName": "Unit3", "unit": "unit3", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit3member2@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member2", "lastName": "Unit3", "unit": "unit3", "rank": "rank1", "afsc": "afsc1", "status": 0 },
+    { "email": "unit3member3@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member3", "lastName": "Unit3", "unit": "unit3", "rank": "rank2", "afsc": "afsc1", "status": 1 },
+    { "email": "unit3member4@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member4", "lastName": "Unit3", "unit": "unit3", "rank": "rank2", "afsc": "afsc2", "status": 1 },
+    { "email": "unit3member5@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member5", "lastName": "Unit3", "unit": "unit3", "rank": "rank3", "afsc": "afsc2", "status": 2 },
+    { "email": "unit3member6@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member6", "lastName": "Unit3", "unit": "unit3", "rank": "rank3", "afsc": "afsc3", "status": 2 },
+    { "email": "unit3member7@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member7", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc3", "status": 3 },
+    { "email": "unit3member8@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member8", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc4", "status": 3 }
   ],
 
   "defaultData": [
