@@ -15,6 +15,18 @@ body,
   position: relative;
 }
 
+.mrdss {
+  display: flex,
+}
+
+table {
+  border-collapse: collapse;
+  overflow-x: scroll;
+}
+.table-responsive {
+  max-height: 320px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -32,4 +44,8 @@ body,
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.table-header-hover:hover {
+  background-color: #bcbcbc;
 }

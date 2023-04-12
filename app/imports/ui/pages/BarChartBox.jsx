@@ -15,7 +15,7 @@ const BarChartBox = () => {
       subscription = UserProfiles.subscribeProfile();
     }
     const rdy = subscription.ready();
-    const profilesList = UserProfiles.find().fetch();
+    const missingList = UserProfiles.find().fetch();
     return {
       table: tableList,
       ready: rdy,

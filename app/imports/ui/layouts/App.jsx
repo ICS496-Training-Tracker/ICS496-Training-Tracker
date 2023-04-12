@@ -29,7 +29,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Profiles from '../pages/Profiles';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-const App = () => {
+  const App = () => {
   const { ready } = useTracker(() => {
     const rdy = Roles.subscription.ready();
     return {
