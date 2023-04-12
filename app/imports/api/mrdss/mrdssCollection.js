@@ -7,15 +7,14 @@ class mrdssCollection {
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
-   * @param trainingTitle The email title associated with the training.
+   * @param trainingTitle The title associated with the training.
    * @param trainedDate The date associated with the training.
    * @param firstName The first name.
    * @param lastName The last name.
    */
   define({ trainingTitle, trainedDate, firstName, lastName }) {
     // if (Meteor.isServer) {
-    const username = email;
-    const user = this.findOne({ trainingTitle, firstName, lastName });
+    const user = this.findOne({ trainingTitle, dueDate, firstName, lastName, });
     if (!user) {
       const trainingID = this._collection.insert({ trainingTitle, trainedDate, firstName, lastName });
       // this._collection.update(profileID, { $set: { userID } });

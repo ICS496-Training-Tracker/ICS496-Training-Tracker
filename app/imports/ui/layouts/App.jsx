@@ -20,7 +20,7 @@ import SignUp from "../pages/SignUp";
 import SignOut from "../pages/SignOut";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/Sidebar";
-import BarChartBox from "../pages/BarChartBox";
+import Table from "../components/Table";
 import SignIn from "../pages/SignIn";
 import NotAuthorized from "../pages/NotAuthorized";
 import { ROLE } from "../../api/role/Role";
@@ -37,14 +37,12 @@ const App = () => {
     };
   });
 
-  const [isSidebar, setIsSidebar] = useState(true);
 
   return (
     <div className="d-flex flex-column min-vh-100">
       {Meteor.user() ? (
         <div className="app">
           <Router>
-            <SideBar />
             <main className="content">
               <NavBar />
               <Routes>
@@ -56,9 +54,33 @@ const App = () => {
                   path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <BarChartBox />
+                      <Table />
                     </ProtectedRoute>
                   }
+                />
+                <Route
+                  path="/profiles"
+                  element={(
+                    <ProtectedRoute>
+                      <Profiles />
+                    </ProtectedRoute>
+                  )}
+                />
+                <Route
+                  path="/profile/:userID"
+                  element={(
+                    <AdminProtectedRoute>
+                      <Profile />
+                    </AdminProtectedRoute>
+                  )}
+                />
+                <Route
+                  path="/reports"
+                  element={(
+                    <ProtectedRoute>
+                      <Reports />
+                    </ProtectedRoute>
+                  )}
                 />
                 <Route path="/notauthorized" element={<NotAuthorized />} />
                 <Route path="*" element={<NotFound />} />
