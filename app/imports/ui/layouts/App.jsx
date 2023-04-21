@@ -20,13 +20,14 @@ import SignUp from "../pages/SignUp";
 import SignOut from "../pages/SignOut";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/Sidebar";
-import Table from "../components/Table";
 import SignIn from "../pages/SignIn";
 import NotAuthorized from "../pages/NotAuthorized";
 import { ROLE } from "../../api/role/Role";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Profiles from '../pages/Profiles';
+import Reports from '../pages/Reports';
+import Tables from "../pages/Tables";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
   const App = () => {
@@ -54,7 +55,7 @@ import Profiles from '../pages/Profiles';
                   path="/dashboard"
                   element={
                     <ProtectedRoute>
-                      <Table />
+                      <Tables />
                     </ProtectedRoute>
                   }
                 />
@@ -70,7 +71,7 @@ import Profiles from '../pages/Profiles';
                   path="/profile/:userID"
                   element={(
                     <AdminProtectedRoute>
-                      <Profile />
+                      <Profiles />
                     </AdminProtectedRoute>
                   )}
                 />

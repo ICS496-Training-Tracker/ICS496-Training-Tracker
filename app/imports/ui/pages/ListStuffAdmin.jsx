@@ -35,9 +35,6 @@ const ListStuffAdmin = () => {
                 <th>Owner</th>
               </tr>
             </thead>
-            <tbody>
-              {stuffs.map((stuff) => <StuffItemAdmin key={stuff._id} stuff={stuff} />)}
-            </tbody>
           </Table>
         </Col>
       </Row>

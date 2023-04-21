@@ -30,12 +30,8 @@
     { "email": "unit3member7@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member7", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc3", "status": 3 },
     { "email": "unit3member8@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member8", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc4", "status": 3 }
   ],
-
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  "defaultMrdssItems": [
+    {"trainingType": "Example","missing": 6, "validating": 30, "completed": 25}
   ],
   "public": {
     "development": true

@@ -2,8 +2,12 @@ import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+import BaseCollection from "../base/BaseCollection";
 
-class mrdssCollection {
+class mrdssCollection extends BaseCollection {
+  constructor() {
+    super('mrdssCollection', new SimpleSchema({}));
+  }
 
   /**
    * Defines the profile associated with an User and the associated Meteor account.
