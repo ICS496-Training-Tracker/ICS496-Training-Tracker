@@ -9,36 +9,34 @@ import {
   ButtonGroup,
   SplitButton,
 } from "react-bootstrap";
-import { tableCollection } from "../../api/mrdss/TableCollection";
+import { MRDSS } from "../../api/mrdss/TableCollection";
+import TableMrdssItems from "../components/TableMrdssItems";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { PAGE_IDS } from "../utilities/PageIDs";
+import { Roles } from "meteor/alanning:roles";
+import { ROLE } from "../../api/role/Role";
 
 const Tables = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, mrdssItems } = useTracker(() => {
+  const { mrdssItems, ready } = useTracker(() => {
     // Get access to Stuff documents.
-    const subscription = tableCollection.subscribeMrdssAdmin();
+    const subscription = MRDSS.subscribeMrdssTable();
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const items = tableCollection.find({}).fetch();
+    const items = MRDSS.find().fetch();
     return {
-      mrdssItems: items,
       ready: rdy,
+      mrdssItems: items,
     };
   }, []);
 
-  const [currentVal, setCurrentVal] = useState("");
-  const onClick = (value) => {
-    if (value === 1) {
-      setCurrentVal("Individual Training");
-    } else if (value === 2) {
-      setCurrentVal("ITRM Training");
-    }
-  };
-
-  return ready ? (
-    <Container id={PAGE_IDS.DASHBOARD} style={{ marginTop: 200 }}>
+  return (ready ? (
+    <Container style={{ marginTop: 200 }}>
+      <div style={{ marginLeft: 600, paddingBottom: 50 }}>
+        {/* Create a dropdown of trainingTypes */}
+        TrainingType
+      </div>
       <Row xs={2} md={16} lg={10}>
         <Col>
           <div>
@@ -52,14 +50,14 @@ const Tables = () => {
             >
               <thead>
                 <tr>
-                  <th>Training Type</th>
-                  <th>Missing</th>
-                  <th>Validating</th>
-                  <th>Completed</th>
+                    <th>Name</th>
+                    <th>Missing</th>
+                    <th>Validating</th>
+                    <th>Completed</th>
                 </tr>
               </thead>
               <tbody>
-                {mrdssItems.map((mrdss) => <TableItems key={mrdss._id} mrdss={mrdss} />)}
+              {mrdssItems.map((items) => <TableMrdssItems key={items._id} items={items} />)}
               </tbody>
             </Table>
           </div>
@@ -76,7 +74,7 @@ const Tables = () => {
             >
               <thead>
                 <tr>
-                  <th>Training Type</th>
+                  <th>Name</th>
                   <th>Missing</th>
                   <th>Validating</th>
                   <th>Completed</th>
@@ -89,60 +87,9 @@ const Tables = () => {
           </div>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <div>
-            <h5>MyLearning</h5>
-          </div>
-          <div>
-            <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
-              size="md"
-              striped
-            >
-              <thead>
-                <tr>
-                  <th>Training Type</th>
-                  <th>Missing</th>
-                  <th>Validating</th>
-                  <th>Completed</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Map data here */}
-              </tbody>
-            </Table>
-          </div>
-        </Col>
-        <Col md={6}>
-          <div>
-            <h5>MyTraining</h5>
-          </div>
-          <div>
-            <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
-              size="md"
-              striped
-            >
-              <thead>
-                <tr>
-                  <th>Training Type</th>
-                  <th>Missing</th>
-                  <th>Validating</th>
-                  <th>Completed</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Map data here */}
-              </tbody>
-            </Table>
-          </div>
-        </Col>
-      </Row>
     </Container>
-  ) : (
-    <LoadingSpinner />
-  );
+  ) :
+    <LoadingSpinner /> );
 };
 
 export default Tables;

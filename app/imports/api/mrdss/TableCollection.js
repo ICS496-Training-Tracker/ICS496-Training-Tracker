@@ -6,32 +6,47 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../role/Role';
 
 
-export const tableMrdssPublications = {
-  tableMrdssItems: 'TableMrdssPublications'
+export const mrdssPublications = {
+  tableMrdssPublications: 'TableMrdssPublications'
 };
 
 
 class TableCollection extends BaseCollection {
   constructor() {
-    super('TableCollection', new SimpleSchema({
-      trainingType: String,
+    super('MRDSS', new SimpleSchema({
+      name: String,
       missing: Number,
       validating: Number,
       completed: Number,
     }));
   }
 
-
-  define({ trainingType, missing, validating, completed }) {
-    const docID = this._collection.insert({ trainingType, missing, validating, completed });
+  /**
+   * Defines a new Stuff item.
+   * @param name the name of the item.
+   * @param missing how many.
+   * @param validating the owner of the item.
+   * @param completed the condition of the item.
+   * @return {String} the docID of the new document.
+   */
+  define({ name, missing, validating, completed }) {
+    const docID = this._collection.insert({ name, missing, validating, completed });
     return docID;
   }
 
+    /**
+   * Updates the given document.
+   * @param docID the id of the document to update.
+   * @param name the new name (optional).
+   * @param missing the new quantity (optional).
+   * @param validating the new condition (optional).
+   * @param completed the new condition (optional).
+   */
 
-  update(docID, { trainingType, missing, validating, completed }) {
+  update(docID, { missing, validating, completed }) {
     const updateData = {};
-    if (trainingType) {
-      updateData.trainingType = trainingType;
+    if (name) {
+      updateData.name = name;
     }
     if (missing) {
       updateData.missing = missing;
@@ -45,11 +60,23 @@ class TableCollection extends BaseCollection {
     this._collection.update(docID, { $set: updateData });
   }
 
+    /**
+   * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
+   * @param { String | Object } type A document or docID in this collection.
+   * @returns true
+   */
+    removeIt(name) {
+      const doc = this.findDoc(name);
+      check(doc, Object);
+      this._collection.remove(doc._id);
+      return true;
+    }
+
   publish() {
     if (Meteor.isServer) {
       const instance = this;
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(tableMrdssPublications.tableMrdssItems, function publish() {
+      Meteor.publish(mrdssPublications.tableMrdssPublications, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -57,13 +84,14 @@ class TableCollection extends BaseCollection {
       });
     }
   }
+
   /**
  * Subscription method for admin users.
  * It subscribes to the entire collection.
  */
-  subscribeMrdssAdmin() {
+  subscribeMrdssTable() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(tableMrdssPublications.tableMrdssItems);
+      return Meteor.subscribe(mrdssPublications.tableMrdssPublications);
     }
     return null;
   }
@@ -75,22 +103,27 @@ class TableCollection extends BaseCollection {
 * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
 */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
+    this.assertRole(userId, [ROLE.ADMIN]);
   }
 
+  
+  /**
+   * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
+   * @param docID
+   * @return {{ missing: *, validating: *, completed: *, name}}
+   */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const trainingType = doc.trainingType;
-    const missing = doc.name;
-    const validating = doc.quantity;
-    const completed = doc.condition;
-    return { trainingType, missing, validating, completed };
+    const name = doc.name;
+    const missing = doc.missing;
+    const validating = doc.validating;
+    const completed = doc.completed;
+    return { name, missing, validating, completed };
   }
 
 }
 
 /**
  * Profides the singleton instance of this class to all other entities.
- * @type {tableCollection}
  */
-export const tableCollection = new TableCollection();
+export const MRDSS = new TableCollection();

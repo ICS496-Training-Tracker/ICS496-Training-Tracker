@@ -30,8 +30,11 @@
     { "email": "unit3member7@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member7", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc3", "status": 3 },
     { "email": "unit3member8@foo.com", "password": "changeme", "role": "UNIT_MEMBER" , "firstName": "Member8", "lastName": "Unit3", "unit": "unit3", "rank": "rank4", "afsc": "afsc4", "status": 3 }
   ],
-  "defaultMrdssItems": [
-    {"trainingType": "Example","missing": 6, "validating": 30, "completed": 25}
+  "defaultData": [
+    {"name": "Example", "missing": 6, "validating": 30, "completed": 25},
+    {"name": "dasdsa", "missing": 6, "validating": 30, "completed": 25},
+    {"name": "asd", "missing": 6, "validating": 30, "completed": 25},
+    {"name": "adasd", "missing": 6, "validating": 30, "completed": 25}
   ],
   "public": {
     "development": true

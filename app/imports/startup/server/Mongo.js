@@ -1,16 +1,17 @@
 import { Meteor } from 'meteor/meteor';
-import { tableCollection } from "../../api/mrdss/TableCollection";
+import { MRDSS } from "../../api/mrdss/TableCollection";
+import { Stuffs } from "../../api/stuff/StuffCollection";
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
-function addData(data) {
-  console.log(`  Adding: ${data.trainingType} (${data.missing}) (${data.validating}) (${data.completed})`);
-  tableCollection.define(data);
+function addMRDSS(data) {
+  console.log(`  Adding: ${data.trainingTitle} (${data.missing}) (${data.validating}) (${data.completed}) (${data.owner})`);
+  MRDSS.define(data);
 }
 
-if(tableCollection.count() === 0) {
-  if (Meteor.settings.defaultMrdssItems) {
-    console.log('Creating default table mrdss data.');
-    Meteor.settings.defaultMrdssItems.map(data => addData(data));
+if(MRDSS.count() === 0) {
+  if (Meteor.settings.defaultData) {
+    console.log('Creating default training type mrdss data.');
+    Meteor.settings.defaultData.map(data => addMRDSS(data));
   }
 }

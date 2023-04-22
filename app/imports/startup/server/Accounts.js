@@ -15,11 +15,6 @@ function createUser(email, role, firstName, lastName, password, unit, rank, afsc
   }
 }
 
-function createMrdss(trainingType, missing, validating, completed) {
-  console.log(`  Creating trainingType ${trainingType} with the following missing: ${missing}.`);
-  tableCollection.define({trainingType, missing, validating, completed});
-}
-
 // When running app for first time, pass a settings file to set up a default user account.
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
