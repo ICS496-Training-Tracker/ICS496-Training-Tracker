@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
-const TableMrdssItems = ({ items }) => (
+const TableItems = ({ items }) => (
   <tr>
     <td >{items.name}</td>
     <td style={{ backgroundColor: "#c73732" }}>{items.missing}</td>
@@ -12,14 +12,14 @@ const TableMrdssItems = ({ items }) => (
 );
 
 // Require a document to be passed to this component.
-TableMrdssItems.propTypes = {
+TableItems.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string,
     missing: PropTypes.number,
     validating: PropTypes.number,
     completed: PropTypes.number,
     _id: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
-export default TableMrdssItems;
+export default TableItems;

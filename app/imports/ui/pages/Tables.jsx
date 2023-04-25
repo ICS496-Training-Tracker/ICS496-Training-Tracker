@@ -11,8 +11,8 @@ import {
   SplitButton,
   DropdownButton,
 } from "react-bootstrap";
-import { MRDSS } from "../../api/mrdss/TableCollection";
-import TableMrdssItems from "../components/TableMrdssItems";
+import { MRDSS } from "../../api/table/TableCollection";
+import TableItems from "../components/TableItems";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { PAGE_IDS } from "../utilities/PageIDs";
 import { Roles } from "meteor/alanning:roles";
@@ -52,13 +52,6 @@ const Tables = () => {
   ];
 
   const [currentProfession, setCurrentProfession] = useState("");
-  const onProfessionClick = (value) => {
-    switch (value) {
-      case 1:
-        setCurrentProfession("Nurse");
-        break;
-    }
-  };
 
   return ready ? (
     <Container>
@@ -79,9 +72,17 @@ const Tables = () => {
         </Col>
         <Col xs={2}>
           {/* List of professions here */}
-          <DropdownButton title={currentProfession}>
+          <DropdownButton
+            title={currentProfession === "" ? "Profession" : currentProfession}
+          >
             {professions.map((prof) => (
-              <Dropdown.Item title={prof} onClick={(val) => setCurrentProfession(val.target.title)}>{prof}</Dropdown.Item>
+              <Dropdown.Item
+                title={prof}
+                onClick={(val) => setCurrentProfession(val.target.title)}
+                key={prof}
+              >
+                {prof}
+              </Dropdown.Item>
             ))}
           </DropdownButton>
         </Col>
@@ -99,7 +100,7 @@ const Tables = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Training Title</th>
                   <th>Missing</th>
                   <th>Validating</th>
                   <th>Completed</th>
@@ -107,7 +108,7 @@ const Tables = () => {
               </thead>
               <tbody>
                 {mrdssItems.map((items) => (
-                  <TableMrdssItems key={items._id} items={items} />
+                  <TableItems key={items._id} items={items} />
                 ))}
               </tbody>
             </Table>
@@ -125,13 +126,71 @@ const Tables = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Training Title</th>
                   <th>Missing</th>
                   <th>Validating</th>
                   <th>Completed</th>
                 </tr>
               </thead>
-              <tbody>{/* Map Data here */}</tbody>
+              <tbody>
+                {mrdssItems.map((items) => (
+                  <TableItems key={items._id} items={items} />
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div>
+            <h5>MyLearning</h5>
+          </div>
+          <div>
+            <Table
+              style={{ marginTop: 10, fontSize: "10px" }}
+              size="md"
+              striped
+            >
+              <thead>
+                <tr>
+                  <th>Training Title</th>
+                  <th>Missing</th>
+                  <th>Validating</th>
+                  <th>Completed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mrdssItems.map((items) => (
+                  <TableItems key={items._id} items={items} />
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+        <Col md={6}>
+          <div>
+            <h5>MyTraining</h5>
+          </div>
+          <div>
+            <Table
+              style={{ marginTop: 10, fontSize: "10px" }}
+              size="md"
+              striped
+            >
+              <thead>
+                <tr>
+                  <th>Training Title</th>
+                  <th>Missing</th>
+                  <th>Validating</th>
+                  <th>Completed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mrdssItems.map((items) => (
+                  <TableItems key={items._id} items={items} />
+                ))}
+              </tbody>
             </Table>
           </div>
         </Col>

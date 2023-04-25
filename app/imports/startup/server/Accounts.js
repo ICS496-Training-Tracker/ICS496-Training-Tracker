@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { ROLE } from '../../api/role/Role';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
-import { tableCollection } from "../../api/mrdss/TableCollection";
 
 /* eslint-disable no-console */
 
