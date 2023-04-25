@@ -13,10 +13,11 @@ class arcnetCollection extends BaseCollection {
    * Defines the profile associated with an User and the associated Meteor account.
    * @param trainingTitle The title associated with the training.
    * @param trainedDate The date associated with the training.
+   * @param trainingCategory the category associated with the training.
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ trainingTitle, trainedDate, dueDate, firstName, lastName }) {
+  define({ trainingTitle, trainedDate, trainingCategory, dueDate, firstName, lastName }) {
     // if (Meteor.isServer) {
     const user = this.findOne({ trainingTitle, dueDate, firstName, lastName, });
     if (!user) {
@@ -69,6 +70,7 @@ class arcnetCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const trainingTitle = doc.trainingTitle;
     const trainedDate = doc.trainedDate;
+    const trainingCategory = doc.trainingCategory;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     return { trainingTitle, trainedDate, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.

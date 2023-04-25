@@ -13,10 +13,11 @@ class mrdssCollection extends BaseCollection {
    * Defines the profile associated with an User and the associated Meteor account.
    * @param trainingTitle The title associated with the training.
    * @param trainedDate The date associated with the training.
+   * @param trainingCategory the category associated with the training.
    * @param firstName The first name.
    * @param lastName The last name.
    */
-  define({ trainingTitle, trainedDate, dueDate, firstName, lastName }) {
+  define({ trainingTitle, trainedDate, dueDate, trainingCategory, firstName, lastName }) {
     // if (Meteor.isServer) {
     const user = this.findOne({ trainingTitle, dueDate, firstName, lastName, });
     if (!user) {
@@ -34,7 +35,7 @@ class mrdssCollection extends BaseCollection {
    * Updates the UserProfile. You cannot change the email or role.
    * @param docID the id of the UserProfile
    * @param trainedDate the date of the training completed.
-   * @param trainingTitle the title of the training completed
+   * @param trainingTitle the title of the training completed.
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
@@ -69,9 +70,10 @@ class mrdssCollection extends BaseCollection {
     const doc = this.findDoc(docID);
     const trainingTitle = doc.trainingTitle;
     const trainedDate = doc.trainedDate;
+    const trainingCategory = doc.trainingCategory;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { trainingTitle, trainedDate, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
+    return { trainingTitle, trainedDate, trainingCategory, firstName, lastName }; // CAM this is not enough for the define method. We lose the password.
   }
 }
 
