@@ -6,8 +6,10 @@ import {
   Row,
   Table,
   Dropdown,
+  DropdownMenu,
   ButtonGroup,
   SplitButton,
+  DropdownButton,
 } from "react-bootstrap";
 import { MRDSS } from "../../api/mrdss/TableCollection";
 import TableMrdssItems from "../components/TableMrdssItems";
@@ -31,12 +33,59 @@ const Tables = () => {
     };
   }, []);
 
-  return (ready ? (
-    <Container style={{ marginTop: 200 }}>
-      <div style={{ marginLeft: 600, paddingBottom: 50 }}>
-        {/* Create a dropdown of trainingTypes */}
-        TrainingType
-      </div>
+  const [currentTraining, setCurrentTraining] = useState("");
+  const onClick = (value) => {
+    if (value === 1) {
+      setCurrentTraining("Individual Training");
+    } else if (value === 2) {
+      setCurrentTraining("ITRM Training");
+    }
+  };
+
+  let professions = [
+    "Administration",
+    "Bioenvironmental Engineer Technician",
+    "Medic",
+    "Nurse",
+    "Physician",
+    "Physician Assistant",
+  ];
+
+  const [currentProfession, setCurrentProfession] = useState("");
+  const onProfessionClick = (value) => {
+    switch (value) {
+      case 1:
+        setCurrentProfession("Nurse");
+        break;
+    }
+  };
+
+  return ready ? (
+    <Container>
+      <Row style={{ paddingBottom: 30 }} className="justify-content-center">
+        <Col xs={2}>
+          <Dropdown as={ButtonGroup}>
+            <SplitButton
+              title={currentTraining === "" ? "Dropdown" : currentTraining}
+            >
+              <Dropdown.Item onClick={() => onClick(1)} eventKey={1}>
+                Individual Training
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => onClick(2)} eventKey={2}>
+                ITRM Training
+              </Dropdown.Item>
+            </SplitButton>
+          </Dropdown>
+        </Col>
+        <Col xs={2}>
+          {/* List of professions here */}
+          <DropdownButton title={currentProfession}>
+            {professions.map((prof) => (
+              <Dropdown.Item title={prof} onClick={(val) => setCurrentProfession(val.target.title)}>{prof}</Dropdown.Item>
+            ))}
+          </DropdownButton>
+        </Col>
+      </Row>
       <Row xs={2} md={16} lg={10}>
         <Col>
           <div>
@@ -50,14 +99,16 @@ const Tables = () => {
             >
               <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Missing</th>
-                    <th>Validating</th>
-                    <th>Completed</th>
+                  <th>Name</th>
+                  <th>Missing</th>
+                  <th>Validating</th>
+                  <th>Completed</th>
                 </tr>
               </thead>
               <tbody>
-              {mrdssItems.map((items) => <TableMrdssItems key={items._id} items={items} />)}
+                {mrdssItems.map((items) => (
+                  <TableMrdssItems key={items._id} items={items} />
+                ))}
               </tbody>
             </Table>
           </div>
@@ -80,16 +131,15 @@ const Tables = () => {
                   <th>Completed</th>
                 </tr>
               </thead>
-              <tbody>
-                {/* Map Data here */}
-              </tbody>
+              <tbody>{/* Map Data here */}</tbody>
             </Table>
           </div>
         </Col>
       </Row>
     </Container>
-  ) :
-    <LoadingSpinner /> );
+  ) : (
+    <LoadingSpinner />
+  );
 };
 
 export default Tables;
