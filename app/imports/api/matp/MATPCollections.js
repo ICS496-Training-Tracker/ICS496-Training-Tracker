@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../stuff/StuffCollection';
-import { MRDSS } from "../table/TableCollection";
+import { MRDSS } from '../table/TableCollection';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 
