@@ -27,3 +27,6 @@ test('Test that landing page shows up', async () => {
 
 /* Test for dashboard page */
 
+/* Test for profiles page */
+
+/* Test for reports page */
