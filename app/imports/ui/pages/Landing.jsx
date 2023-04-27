@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
@@ -30,7 +29,7 @@ const Landing = () => (
             <p>
               Track your own stats or manage your unit stats by signing in
             </p>
-            <Button as={NavLink} to="/signin">
+            <Button>
               Sign In
             </Button>
           </Card.Body>

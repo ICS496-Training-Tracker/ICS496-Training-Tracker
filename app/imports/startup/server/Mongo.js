@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { MRDSS } from '../../api/table/TableCollection';
+import { MRDSS } from "../../api/table/TableCollection";
+import { Stuffs } from "../../api/stuff/StuffCollection";
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
