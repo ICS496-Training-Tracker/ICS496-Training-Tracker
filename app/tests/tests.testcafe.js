@@ -4,6 +4,7 @@ import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { profilesPage } from './profiles.page';
+import { reportsPage} from './reports.page';
 import { navBar } from './navbar.component';
 import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
@@ -38,3 +39,10 @@ test('Test that profiles page shows up', async () => {
 });
 
 /* Test for reports page */
+test('Test that reports page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await t.navigateTo('http://localhost:3000/reports');
+  await reportsPage.isDisplayed();
+  await navBar.ensureLogout();
+});
