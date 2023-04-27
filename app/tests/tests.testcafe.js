@@ -3,6 +3,7 @@ import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* mana
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
+import { profilesPage } from './profiles.page';
 import { navBar } from './navbar.component';
 import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
@@ -27,3 +28,13 @@ test('Test that landing page shows up', async () => {
 
 /* Test for dashboard page */
 
+/* Test for profiles page */
+test('Test that profiles page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await t.navigateTo('http://localhost:3000/profiles');
+  await profilesPage.isDisplayed();
+  await navBar.ensureLogout();
+});
+
+/* Test for reports page */
