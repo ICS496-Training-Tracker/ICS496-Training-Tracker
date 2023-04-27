@@ -1,6 +1,7 @@
 import { Selector, t } from 'testcafe';
 import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage } from './simple.page';
 import { landingPage } from './landing.page';
+import { dashboard } from "./dashboard.page";
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { profilesPage } from './profiles.page';
@@ -18,8 +19,27 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-test('Test that landing page shows up', async () => {
-  await landingPage.isDisplayed();
+
+/* Test for dashboard display */
+test('Test that dashboard page shows up', async () => {
+  await dashboard.isDisplayed();
+});
+
+
+/* Test that signin and signout work for regular user */
+test('Test that signin and signout work', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.isLoggedIn(credentials.username);
+  await navBar.logout();
+  await signOutPage.isDisplayed();
+});
+
+/* Admin page sign in and logged in test */
+test('Test that admin pages show up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(adminCredentials.username, adminCredentials.password);
+  await navBar.isLoggedIn(adminCredentials.username);
 });
 
 /* Test for signup page */
