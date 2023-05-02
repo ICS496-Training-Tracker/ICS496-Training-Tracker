@@ -26,6 +26,7 @@ const NavBar = () => {
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Admin</Nav.Link>,
                 <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
+                <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/fileDrop" key="fileDrop">FileDrop</Nav.Link>,
               ]
             ) : ''}
           </Nav>

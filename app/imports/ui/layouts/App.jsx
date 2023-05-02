@@ -28,6 +28,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Profiles from '../pages/Profiles';
 import Reports from '../pages/Reports';
 import Tables from "../pages/Tables";
+import FileDrop from '../pages/FileDrop';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
   const App = () => {
@@ -80,6 +81,13 @@ import Tables from "../pages/Tables";
                   element={(
                     <ProtectedRoute>
                       <Reports />
+                    </ProtectedRoute>
+                  )}
+                /><Route
+                  path="/fileDrop"
+                  element={(
+                    <ProtectedRoute>
+                      <FileDrop />
                     </ProtectedRoute>
                   )}
                 />
