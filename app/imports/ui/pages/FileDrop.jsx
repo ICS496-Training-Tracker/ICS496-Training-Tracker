@@ -18,7 +18,7 @@ const FileDrop = () => {
   return (
     <Container id={PAGE_IDS.REPORTS}>
       <Row>
-        <Col className="border-end px-5">
+        <Col>
           <Row>
             <h3 className="text-center">Upload Certificates</h3>
           </Row>
