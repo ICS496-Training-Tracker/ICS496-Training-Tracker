@@ -54,7 +54,7 @@ const Tables = () => {
   const [currentProfession, setCurrentProfession] = useState("");
 
   return ready ? (
-    <Container style={{paddingTop: 200}}>
+    <Container style={{ paddingTop: 200 }} id={PAGE_IDS.DASHBOARD}>
       <Row style={{ paddingBottom: 30 }} className="justify-content-center">
         <Col xs={2}>
           <Dropdown as={ButtonGroup}>
