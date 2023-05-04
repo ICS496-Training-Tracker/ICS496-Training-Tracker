@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { Meteor } from "meteor/meteor";
-import { Alert, Card, Col, Container, Row } from "react-bootstrap";
-import SimpleSchema from "simpl-schema";
-import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import {
   AutoForm,
   ErrorsField,
   SubmitField,
   TextField,
-} from "uniforms-bootstrap5";
-import { PAGE_IDS } from "../utilities/PageIDs";
-import { COMPONENT_IDS } from "../utilities/ComponentIDs";
+} from 'uniforms-bootstrap5';
+import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /**
  * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
  * Authentication errors modify the component’s state to be displayed
  */
 const SignIn = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [redirect, setRedirect] = useState(false);
   const schema = new SimpleSchema({
     email: String,
@@ -44,7 +44,7 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screen
   if (redirect) {
-    window.location.href="/";
+    window.location.href = '/';
     return <Navigate to="/" />;
   }
   // Otherwise return the Login form.
@@ -77,8 +77,8 @@ const SignIn = () => {
           <Alert variant="secondary">
             <Link to="/signup">Click here to Register</Link>
           </Alert>
-          {error === "" ? (
-            ""
+          {error === '' ? (
+            ''
           ) : (
             <Alert variant="danger">
               <Alert.Heading>Login was not successful</Alert.Heading>

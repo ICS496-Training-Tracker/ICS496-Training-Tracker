@@ -8,7 +8,7 @@ function addMRDSS(data) {
   MRDSS.define(data);
 }
 
-if(MRDSS.count() === 0) {
+if (MRDSS.count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default training type mrdss data.');
     Meteor.settings.defaultData.map(data => addMRDSS(data));

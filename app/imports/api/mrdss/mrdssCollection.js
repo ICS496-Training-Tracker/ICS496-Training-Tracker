@@ -2,7 +2,7 @@ import SimpleSchema from 'simpl-schema';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
-import BaseCollection from "../base/BaseCollection";
+import BaseCollection from '../base/BaseCollection';
 
 class mrdssCollection extends BaseCollection {
   constructor() {
@@ -19,7 +19,7 @@ class mrdssCollection extends BaseCollection {
    */
   define({ trainingTitle, trainedDate, dueDate, trainingCategory, firstName, lastName }) {
     // if (Meteor.isServer) {
-    const user = this.findOne({ trainingTitle, dueDate, firstName, lastName, });
+    const user = this.findOne({ trainingTitle, dueDate, firstName, lastName });
     if (!user) {
       const trainingID = this._collection.insert({ trainingTitle, dueDate, trainedDate, firstName, lastName });
       // this._collection.update(profileID, { $set: { userID } });
@@ -60,7 +60,7 @@ class mrdssCollection extends BaseCollection {
 
     this._collection.update(docID, { $set: updateData });
   }
-  
+
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile

@@ -21,7 +21,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Profiles from '../pages/Profiles';
 import Profile from '../pages/Profile';
 import Reports from '../pages/Reports';
-import Tables from "../pages/Tables";
+import Tables from '../pages/Tables';
 import FileDrop from '../pages/FileDrop';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */

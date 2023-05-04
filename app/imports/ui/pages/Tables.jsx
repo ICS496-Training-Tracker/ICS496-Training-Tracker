@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useTracker } from "meteor/react-meteor-data";
+import React, { useState } from 'react';
+import { useTracker } from 'meteor/react-meteor-data';
 import {
   Col,
   Container,
@@ -10,13 +10,13 @@ import {
   ButtonGroup,
   SplitButton,
   DropdownButton,
-} from "react-bootstrap";
-import { MRDSS } from "../../api/table/TableCollection";
-import TableItems from "../components/TableItems";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { PAGE_IDS } from "../utilities/PageIDs";
-import { Roles } from "meteor/alanning:roles";
-import { ROLE } from "../../api/role/Role";
+} from 'react-bootstrap';
+import { Roles } from 'meteor/alanning:roles';
+import { MRDSS } from '../../api/table/TableCollection';
+import TableItems from '../components/TableItems';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { PAGE_IDS } from '../utilities/PageIDs';
+import { ROLE } from '../../api/role/Role';
 
 const Tables = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -33,25 +33,25 @@ const Tables = () => {
     };
   }, []);
 
-  const [currentTraining, setCurrentTraining] = useState("");
+  const [currentTraining, setCurrentTraining] = useState('');
   const onClick = (value) => {
     if (value === 1) {
-      setCurrentTraining("Individual Training");
+      setCurrentTraining('Individual Training');
     } else if (value === 2) {
-      setCurrentTraining("ITRM Training");
+      setCurrentTraining('ITRM Training');
     }
   };
 
-  let professions = [
-    "Administration",
-    "Bioenvironmental Engineer Technician",
-    "Medic",
-    "Nurse",
-    "Physician",
-    "Physician Assistant",
+  const professions = [
+    'Administration',
+    'Bioenvironmental Engineer Technician',
+    'Medic',
+    'Nurse',
+    'Physician',
+    'Physician Assistant',
   ];
 
-  const [currentProfession, setCurrentProfession] = useState("");
+  const [currentProfession, setCurrentProfession] = useState('');
 
   return ready ? (
     <Container style={{ paddingTop: 200 }} id={PAGE_IDS.DASHBOARD}>
@@ -59,7 +59,7 @@ const Tables = () => {
         <Col xs={2}>
           <Dropdown as={ButtonGroup}>
             <SplitButton
-              title={currentTraining === "" ? "Dropdown" : currentTraining}
+              title={currentTraining === '' ? 'Dropdown' : currentTraining}
             >
               <Dropdown.Item onClick={() => onClick(1)} eventKey={1}>
                 Individual Training
@@ -73,7 +73,7 @@ const Tables = () => {
         <Col xs={2}>
           {/* List of professions here */}
           <DropdownButton
-            title={currentProfession === "" ? "Profession" : currentProfession}
+            title={currentProfession === '' ? 'Profession' : currentProfession}
           >
             {professions.map((prof) => (
               <Dropdown.Item
@@ -94,7 +94,7 @@ const Tables = () => {
           </div>
           <div className="table-responsive">
             <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
+              style={{ marginTop: 10, fontSize: '10px' }}
               size="md"
               striped
             >
@@ -120,7 +120,7 @@ const Tables = () => {
           </div>
           <div>
             <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
+              style={{ marginTop: 10, fontSize: '10px' }}
               size="md"
               striped
             >
@@ -148,7 +148,7 @@ const Tables = () => {
           </div>
           <div>
             <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
+              style={{ marginTop: 10, fontSize: '10px' }}
               size="md"
               striped
             >
@@ -174,7 +174,7 @@ const Tables = () => {
           </div>
           <div>
             <Table
-              style={{ marginTop: 10, fontSize: "10px" }}
+              style={{ marginTop: 10, fontSize: '10px' }}
               size="md"
               striped
             >

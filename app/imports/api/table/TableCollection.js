@@ -1,15 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
-import SimpleSchema from "simpl-schema";
-import BaseCollection from "../base/BaseCollection";
+import SimpleSchema from 'simpl-schema';
 import { Roles } from 'meteor/alanning:roles';
+import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-
 export const mrdssPublications = {
-  tableMrdssPublications: 'TableMrdssPublications'
+  tableMrdssPublications: 'TableMrdssPublications',
 };
-
 
 class TableCollection extends BaseCollection {
   constructor() {
@@ -34,7 +32,7 @@ class TableCollection extends BaseCollection {
     return docID;
   }
 
-    /**
+  /**
    * Updates the given document.
    * @param docID the id of the document to update.
    * @param name the new name (optional).
@@ -60,17 +58,17 @@ class TableCollection extends BaseCollection {
     this._collection.update(docID, { $set: updateData });
   }
 
-    /**
+  /**
    * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
    * @param { String | Object } type A document or docID in this collection.
    * @returns true
    */
-    removeIt(name) {
-      const doc = this.findDoc(name);
-      check(doc, Object);
-      this._collection.remove(doc._id);
-      return true;
-    }
+  removeIt(name) {
+    const doc = this.findDoc(name);
+    check(doc, Object);
+    this._collection.remove(doc._id);
+    return true;
+  }
 
   publish() {
     if (Meteor.isServer) {
@@ -106,7 +104,6 @@ class TableCollection extends BaseCollection {
     this.assertRole(userId, [ROLE.ADMIN]);
   }
 
-  
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID

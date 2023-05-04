@@ -24,7 +24,7 @@ const NavBar = () => {
           <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
         ]
       );
-    } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_TRAINER])) {
+    } if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_TRAINER])) {
       return (
         [
           <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
@@ -32,16 +32,16 @@ const NavBar = () => {
           <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
         ]
       );
-    } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_MEMBER])) {
+    } if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_MEMBER])) {
       return (
         [
           <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
           <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Profile</Nav.Link>,
         ]
       );
-    } else {
-      return null;
     }
+    return null;
+
   };
 
   return (

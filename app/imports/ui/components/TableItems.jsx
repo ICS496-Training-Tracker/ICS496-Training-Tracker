@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/ListStuffAdmin.jsx. */
 const TableItems = ({ items }) => (
   <tr>
-    <td >{items.name}</td>
-    <td style={{ backgroundColor: "#c73732" }}>{items.missing}</td>
-    <td style={{ backgroundColor: "#ded362" }}>{items.validating}</td>
-    <td style={{ backgroundColor: "#7ccf78" }}>{items.completed}</td>
+    <td>{items.name}</td>
+    <td style={{ backgroundColor: '#c73732' }}>{items.missing}</td>
+    <td style={{ backgroundColor: '#ded362' }}>{items.validating}</td>
+    <td style={{ backgroundColor: '#7ccf78' }}>{items.completed}</td>
   </tr>
 );
 
