@@ -14,6 +14,36 @@ const NavBar = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const menuStyle = { marginBottom: '10px' };
+
+  const getLinks = () => {
+    if (Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
+      return (
+        [
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Admin</Nav.Link>,
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
+        ]
+      );
+    } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_TRAINER])) {
+      return (
+        [
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Profiles</Nav.Link>,
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
+        ]
+      );
+    } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.UNIT_MEMBER])) {
+      return (
+        [
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
+          <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Profile</Nav.Link>,
+        ]
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <Navbar expand="lg" style={menuStyle}>
       <Container>
@@ -21,14 +51,7 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="me-auto justify-content-start">
-            {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
-              [
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD} as={NavLink} to="/dashboard" key="dash">Dashboard</Nav.Link>,
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_PROFILES} as={NavLink} to="/profiles" key="profile">Admin</Nav.Link>,
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/reports" key="report">Reports</Nav.Link>,
-                <Nav.Link id={COMPONENT_IDS.NAVBAR_REPORTS} as={NavLink} to="/fileDrop" key="fileDrop">FileDrop</Nav.Link>,
-              ]
-            ) : ''}
+            {getLinks()}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (

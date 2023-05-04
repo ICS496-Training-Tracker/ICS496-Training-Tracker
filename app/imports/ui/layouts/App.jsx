@@ -1,37 +1,31 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Meteor } from "meteor/meteor";
-import { Roles } from "meteor/alanning:roles";
-import { useTracker } from "meteor/react-meteor-data";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { useTracker } from 'meteor/react-meteor-data';
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-} from "react-router-dom";
-import Footer from "../components/Footer";
-import Landing from "../pages/Landing";
-import ListStuff from "../pages/ListStuff";
-import ListStuffAdmin from "../pages/ListStuffAdmin";
-import AddStuff from "../pages/AddStuff";
-import EditStuff from "../pages/EditStuff";
-import NotFound from "../pages/NotFound";
-import SignUp from "../pages/SignUp";
-import SignOut from "../pages/SignOut";
-import NavBar from "../components/NavBar";
-import SideBar from "../components/Sidebar";
-import SignIn from "../pages/SignIn";
-import NotAuthorized from "../pages/NotAuthorized";
-import { ROLE } from "../../api/role/Role";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+} from 'react-router-dom';
+import Landing from '../pages/Landing';
+import NotFound from '../pages/NotFound';
+import SignUp from '../pages/SignUp';
+import SignOut from '../pages/SignOut';
+import NavBar from '../components/NavBar';
+import SignIn from '../pages/SignIn';
+import NotAuthorized from '../pages/NotAuthorized';
+import { ROLE } from '../../api/role/Role';
+import LoadingSpinner from '../components/LoadingSpinner';
 import Profiles from '../pages/Profiles';
+import Profile from '../pages/Profile';
 import Reports from '../pages/Reports';
 import Tables from "../pages/Tables";
 import FileDrop from '../pages/FileDrop';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-  const App = () => {
+const App = () => {
   const { ready } = useTracker(() => {
     const rdy = Roles.subscription.ready();
     return {
@@ -39,8 +33,7 @@ import FileDrop from '../pages/FileDrop';
     };
   });
 
-
-  return (
+  return ready ? (
     <div className="d-flex flex-column min-vh-100">
       {Meteor.user() ? (
         <div className="app">
@@ -48,17 +41,17 @@ import FileDrop from '../pages/FileDrop';
             <main className="content">
               <NavBar />
               <Routes>
-                <Route exact path="/" element={<Landing />} />
+                <Route exact path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signout" element={<SignOut />} />
                 <Route
                   path="/dashboard"
-                  element={
+                  element={(
                     <ProtectedRoute>
                       <Tables />
                     </ProtectedRoute>
-                  }
+                  )}
                 />
                 <Route
                   path="/profiles"
@@ -71,9 +64,9 @@ import FileDrop from '../pages/FileDrop';
                 <Route
                   path="/profile/:userID"
                   element={(
-                    <AdminProtectedRoute>
-                      <Profiles />
-                    </AdminProtectedRoute>
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
                   )}
                 />
                 <Route
@@ -107,11 +100,11 @@ import FileDrop from '../pages/FileDrop';
             <Route path="/signout" element={<SignOut />} />
             <Route
               path="/home"
-              element={
+              element={(
                 <ProtectedRoute>
                   <Landing />
                 </ProtectedRoute>
-              }
+              )}
             />
             <Route path="/notauthorized" element={<NotAuthorized />} />
             <Route path="*" element={<NotFound />} />
@@ -119,7 +112,7 @@ import FileDrop from '../pages/FileDrop';
         </Router>
       )}
     </div>
-  );
+  ) : null;
 };
 
 /*
