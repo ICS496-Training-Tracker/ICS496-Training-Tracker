@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 import { Upload, BoxArrowInDown } from 'react-bootstrap-icons';
 
-const DragAndDrop = ({ onUpload }) => {
+const DragAndDrop = ({ onUpload, accept }) => {
   const [hover, setHover] = useState(false);
   const [drag, setDrag] = useState(false);
   const [file, setFile] = useState(null);
@@ -111,6 +111,7 @@ const DragAndDrop = ({ onUpload }) => {
         type="file"
         style={{ display: 'none' }}
         onChange={handleChange}
+        accept={accept}
       />
       {drag ? (
         <div
@@ -157,6 +158,11 @@ const DragAndDrop = ({ onUpload }) => {
 
 DragAndDrop.propTypes = {
   onUpload: PropTypes.func.isRequired,
+  accept: PropTypes.string,
+};
+
+DragAndDrop.defaultProps = {
+  accept: '',
 };
 
 export default DragAndDrop;
